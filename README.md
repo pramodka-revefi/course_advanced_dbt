@@ -1,5 +1,12 @@
 # Welcome to the Bingeflix Data Team
 
+## Project 1
+Addressed the following issues flagged by dbt evaluator:
+- Add documentation for events model
+- Labelled mrr model as fct (Needed to change the name inside the yml as well!)
+- Move dim_dates from wrong folder
+- Add exception to the evaluator for dim_dates (this model does not have a source)
+
 ## First-Time Setup
 #### Part 1: Setup Snowflake account
 
