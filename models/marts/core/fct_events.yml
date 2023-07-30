@@ -1,6 +1,10 @@
 models:
-  - name: stg_bingeflix_events
+  - name: fct_events
     description: '{{ doc("bingeflix_event_table") }}'
+    meta:
+      priority: high
+      owner:
+        - pramodka
     columns:
       - name: session_id
         description: '{{ doc("bingeflix_common_sesion_id") }}'

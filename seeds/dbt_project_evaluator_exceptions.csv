@@ -1,0 +1,2 @@
+fct_name,column_name,id_to_exclude,comment
+fct_root_models,child,dim_dates,Models generated using dbt_utils.date_spine and is fully self contained

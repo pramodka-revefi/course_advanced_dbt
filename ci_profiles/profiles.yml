@@ -9,7 +9,7 @@ course_advanced_dbt:
       role: transformer
       warehouse: transforming
       database: dev
-      schema: dbt_lindsay_ci_run
+      schema: dbt_pramodkareveficom_ci_run
       threads: 10
     production:
       type: snowflake
@@ -19,5 +19,5 @@ course_advanced_dbt:
       role: transformer
       warehouse: transforming
       database: analytics
-      schema: dbt_lindsay
+      schema: dbt_pramodkareveficom
       threads: 10
