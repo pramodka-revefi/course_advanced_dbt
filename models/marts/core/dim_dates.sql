@@ -10,7 +10,7 @@ date_spine AS (
 }}
 ),
 
-final AS (
+last AS (
     SELECT
         date_day AS calendar_date,
         CAST(DATE_TRUNC('week', date_day) AS DATE) AS date_week,
@@ -25,4 +25,4 @@ final AS (
         date_spine
 )
 
-SELECT * FROM final
+SELECT * FROM last
