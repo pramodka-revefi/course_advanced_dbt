@@ -32,3 +32,8 @@ models:
         description: "The click through rate on the campaign impressions."
         tests:
           - not_null
+
+      - name: rolling_7_periods_spend_sum_per_campaign_id
+        description: "Rolling total spend over the last 7 days for the campaign."
+        tests:
+          - not_null
