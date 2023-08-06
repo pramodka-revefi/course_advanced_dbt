@@ -1,0 +1,27 @@
+version: 2
+
+macros:
+  - name: cents_to_dollars
+    description: A macro to convert cents to dollars
+    arguments:
+      - name: column_name
+        type: string
+        description: The name of the column you want to convert
+  - name: rolling_aggregate
+    description: A macro to compute any given aggregate function over a sliding/rolling window
+    arguments:
+      - name: column_name
+        type: string
+        description: The name of the column upon which the aggregate is performed. Eg. SUM(cost) -> cost is the column_name
+      - name: partition_by
+        type: string
+        description: The partitioning column for the aggregate. Eg. SUM(cost) by product -> product is the partitioning column
+      - name: order_by
+        type: string
+        description: The ordering column to determine the rolling window. E.g. SUM(cost) over last 7 days -> date is the ordering column
+      - name: aggregate_fn
+        type: string
+        description: The aggregate funcation such as sum, avg etc. Must match SQL command for the aggregate. Defaults to 'avg'.
+      - name:  lookback_window_periods
+        type: number
+        description: The number of rows to lookback based on the ordering. Defaults to 7.
