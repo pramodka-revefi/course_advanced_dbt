@@ -25,3 +25,9 @@ macros:
       - name:  lookback_window_periods
         type: number
         description: The number of rows to lookback based on the ordering. Defaults to 7.
+  - name: start_date_of_month
+    description: A macro that converts a date to the first date of its month.
+    arguments:
+      - name: date_column
+        type: string
+        description: The name of the date column for which the month is needed. Defaults to CURRENT_DATE.

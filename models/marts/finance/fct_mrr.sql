@@ -12,8 +12,8 @@ monthly_subscriptions AS (
         ends_at,
         plan_name,
         pricing,
-        DATE(DATE_TRUNC('month', starts_at)) AS start_month,
-        DATE(DATE_TRUNC('month', ends_at)) AS end_month
+        {{ start_date_of_month('starts_at') }} AS start_month,
+        {{ start_date_of_month('ends_at') }} AS end_month
     FROM
         {{ ref('dim_subscriptions') }}
     WHERE
@@ -23,11 +23,9 @@ monthly_subscriptions AS (
 -- Use the dates spine to generate a list of months
 months AS (
     SELECT
-        calendar_date AS date_month
+        DISTINCT {{ start_date_of_month('calendar_date') }} AS date_month
     FROM
         {{ ref('dim_dates') }}
-    WHERE
-        day_of_month = 1
 ),
 
 -- Logic CTEs
@@ -46,7 +44,7 @@ subscription_periods AS (
         -- For users who haven't ended their subscription yet (end_month is NULL) set the end_month to one month from the current date (these rows will be removed from the final CTE)
         CASE
             WHEN start_month = end_month THEN DATEADD('month', 1, end_month)
-            WHEN end_month IS NULL THEN DATE(DATEADD('month', 1, DATE_TRUNC('month', CURRENT_DATE)))
+            WHEN end_month IS NULL THEN DATE(DATEADD('month', 1, {{ start_date_of_month() }}))
             ELSE end_month
         END AS end_month
     FROM
@@ -198,7 +196,7 @@ final AS (
             ON subscription_periods.user_id = mrr_with_changes.user_id
                 AND subscription_periods.subscription_id = mrr_with_changes.subscription_id
     WHERE
-        date_month <= DATE_TRUNC('month', CURRENT_DATE)
+        date_month <= {{ start_date_of_month() }}
 )
 
 SELECT
